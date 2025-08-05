@@ -1,5 +1,6 @@
 package likelion13th.shop.repository;
 
+
 import likelion13th.shop.domain.Category;
 import likelion13th.shop.domain.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,7 +10,6 @@ import java.util.List;
 
 @Repository
 public interface ItemRepository extends JpaRepository<Item, Long> {
-    //save, findById, findAll 같은 기본 기능 자동으로 제공됨
-    //카테고리별 아이템 조회
-    List<Item> findByCategories(Category category);
+    List<Item> findAllByCategoryId(Long categoryId);
 }
+// 특정 카테고리에 속한 상품(Item) 목록을 조회하기 위해 findByCategories 메서드를 정의한 JPA 리포지토리

@@ -7,8 +7,6 @@ import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import likelion13th.shop.domain.entity.Category;
-import likelion13th.shop.domain.entity.Order;
 
 @Entity
 @Getter
@@ -43,7 +41,6 @@ public class Item extends BaseEntity {
     @ManyToMany(mappedBy = "items")
     private List<Category> categories = new ArrayList<>();
 
-    //Order과 일대다 연관관계 설정
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Order> orders = new ArrayList<>();
@@ -56,3 +53,5 @@ public class Item extends BaseEntity {
         this.isNew= false;
     }
 }
+// 상품 정보를 나타내는 엔티티로, 이름, 가격, 브랜드, 이미지 경로, 신상품 여부 등의 필드를 포함
+// 카테고리와는 다대다, 주문과는 일대다 연관관계를 설정하여 상품 기반의 연관 데이터를 관리할 수 있도록 구성
