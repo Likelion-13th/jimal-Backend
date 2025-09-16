@@ -9,8 +9,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class CategoryResponse {
     private long id;
-
-    @NotBlank(message = "카테고리 이름이 필요합니다.")
+    
     private String name;
 
     public static CategoryResponse from(Category category) {

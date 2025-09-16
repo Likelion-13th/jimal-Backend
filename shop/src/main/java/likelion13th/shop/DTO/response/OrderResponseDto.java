@@ -1,14 +1,16 @@
 package likelion13th.shop.DTO.response;
 
-
+import com.fasterxml.jackson.annotation.JsonProperty;
 import likelion13th.shop.domain.Order;
 import likelion13th.shop.global.constant.OrderStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Getter
+@NoArgsConstructor
 @AllArgsConstructor
 public class OrderResponseDto {
     private Long orderId;

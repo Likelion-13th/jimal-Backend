@@ -9,47 +9,33 @@ import likelion13th.shop.global.api.ApiResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Collections;
 
+@Tag(name = "카테고리", description = "카테고리 관련 API 입니다.")
 @RestController
 @RequestMapping("/categories")
 @RequiredArgsConstructor
 public class CategoryController {
     private final CategoryService categoryService;
 
-    //카테고리 생성
-    @PostMapping
-    @Operation(summary = "카테고리 생성", description = "새로운 카테고리를 생성합니다.")
-    public ApiResponse<?> createCategory(
-            @RequestBody CategoryRequest request
-    ) {
-        CategoryResponse created = categoryService.createCategory(request);
-        return ApiResponse.onSuccess(SuccessCode.CREATED, created);
-    }
-
     //카테코리 별 상품 조회
     @GetMapping("/{categoryId}/items")
     @Operation(summary = "카테고리 별 상품 조회", description = "카테고리 별 상품을 조회합니다.")
     public ApiResponse<?> getItemsByCategory(@PathVariable Long categoryId) {
         List<ItemResponse> items = categoryService.getItemsByCategory(categoryId);
+
+        if (items.isEmpty()) {
+            return ApiResponse.onSuccess(SuccessCode.CATEGORY_ITEMS_EMPTY, Collections.emptyList());
+        }
+
         return ApiResponse.onSuccess(SuccessCode.CATEGORY_ITEMS_GET_SUCCESS, items);
-    }
-
-    //모든 카테고리 조회
-    @GetMapping
-    @Operation(summary = "모든 카테고리 조회", description = "모든 카테고리를 조회합니다.")
-    public ApiResponse<?> getAllCategories() {
-        List<CategoryResponse> categories = categoryService.getAllCategories();
-        return ApiResponse.onSuccess(SuccessCode.CATEGORY_ITEMS_GET_SUCCESS, categories);
-    }
-
-    //카테고리 삭제
-    @DeleteMapping("/{categoryId}")
-    @Operation(summary = "카테고리 취소", description = "카테고리를 삭제합니다.")
-    public ApiResponse<?> deleteCategory(@PathVariable Long categoryId) {
-        categoryService.deleteCategory(categoryId);
-        return ApiResponse.onSuccess(SuccessCode.OK, "카테고리가 삭제되었습니다.");
     }
 }
 // Order API 패턴을 참고하여 카테고리 생성, 조회, 삭제 기능을 구현

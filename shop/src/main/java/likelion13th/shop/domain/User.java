@@ -10,7 +10,6 @@ import java.util.List;
 
 @Entity
 @Getter
-@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -54,17 +53,14 @@ public class User extends BaseEntity {
     private RefreshToken auth;
 
     // 주소 정보 (임베디드 타입)
+    @Setter
     @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "zipcode", column = @Column(name = "zipcode", nullable = false)),
-            @AttributeOverride(name = "address", column = @Column(name = "address", nullable = false)),
-            @AttributeOverride(name = "addressDetail", column = @Column(name = "address_detail", nullable = false))
-    })
     private Address address;
 
-    // 주소 저장/수정 메서드 추가
-    public void updateAddress(Address address) {
-        this.address = address;
+    // 주문 추가 메서드
+    public void addOrder(Order order) {
+        orders.add(order);
+        order.setUser(this);
     }
 
     // 주문 정보 (1:N 관계)
@@ -103,6 +99,11 @@ public class User extends BaseEntity {
             throw new IllegalArgumentException("총 결제 금액은 음수가 될 수 없습니다.");
         }
         this.recentTotal = newTotal;
+    }
+
+    // 주소 저장/수정 메서드 추가
+    public void updateAddress(Address address) {
+        this.address = address;
     }
 }
 // 카카오 로그인 기반 사용자 정보를 나타내는 엔티티로, 마일리지, 주소, 주문 등 도메인 관련 필드를 포함
