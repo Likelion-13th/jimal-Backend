@@ -24,7 +24,7 @@ public class UserAddressService {
                 .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
         // 사용자가 입력한 값이 없을 경우 기본 주소 사용
-        String zipcode = request.getZipcode();
+        String zipcode = request.getZipCode();
         String address = request.getAddress();
         String detail = request.getAddressDetail();
 

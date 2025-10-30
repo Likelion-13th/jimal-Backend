@@ -60,12 +60,3 @@ public class RefreshToken {
     // (선택) 가독성 향상을 위한 헬퍼 메서드 예시
     // public boolean isExpired() { return ttl != null && System.currentTimeMillis() >= ttl; }
 }
-/*
- 1) 왜 필요한가?
- - access Token이 만료됐을 때, 사용자가 재로그인 없이 새로운 토큰을 발급하기 위해 필요합니다.
- - refresh Token을 데이터베이스에 저장하여 각 사용자의 로그인을 통제할 수 있습니다.
- 2) 없으면/틀리면?
- - 없으면 서버가 refresh Token을 관리할 수 없어서 한 번 발급된 토큰을 만료 전까지 유효하게 되기 때문에 보안에 취약합니다.
- - User와의 연관관계가 틀리면 한 명의 사용자가 여러 개의 refresh Token을 가질 수 있게 되고 진짜 유효한 토큰을 찾을 수 없어서 보안에 취약합니다.
- - ttl 필드가 없거나 틀리면 토큰이 영원히 만료되지 않거나 유효한 토큰이 만료 처리되어 로그인에 오류가 발생할 수 있습니다.
- */

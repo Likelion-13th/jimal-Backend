@@ -10,7 +10,7 @@ public class AddressResponse {
     private String addressDetail;
 
     public AddressResponse(Address address) {
-        this.zipcode = address.getZipcode();
+        this.zipCode = address.getZipcode();
         this.address = address.getAddress();
         this.addressDetail = address.getAddressDetail();
     }
