@@ -2,7 +2,7 @@ package likelion13th.shop.service;
 
 import jakarta.transaction.Transactional;
 import likelion13th.shop.DTO.request.OrderCreateRequest;
-import likelion13th.shop.DTO.response.OrderResponse;
+import likelion13th.shop.DTO.response.OrderResponseDto;
 import likelion13th.shop.domain.Item;
 import likelion13th.shop.domain.Order;
 import likelion13th.shop.domain.User;
@@ -30,7 +30,7 @@ public class OrderService {
 
     /** 주문 생성 **/
     @Transactional
-    public OrderResponse createOrder(OrderCreateRequest request, CustomUserDetails customUserDetails) {
+    public OrderResponseDto createOrder(OrderCreateRequest request, CustomUserDetails customUserDetails) {
         // 사용자 조회
         User user = userService.getAuthenticatedUser(customUserDetails.getProviderId());
         // 상품 조회
@@ -42,7 +42,7 @@ public class OrderService {
         // 마일리지 유효성 검사
         int mileageToUse = request.getMileageToUse();
         if (mileageToUse > user.getMaxMileage()) {
-            throw new GeneralException(ErrorCode.INVALID_MILEAGE);
+            throw new GeneralException(ErrorCode.TOKEN_INVALID);
         }
         // 논리 오류가 있엇서용...
         // 사용할 수 있는 최대 마일리지 = 총 금액
@@ -65,16 +65,16 @@ public class OrderService {
         //주문 저장
         orderRepository.save(order);
 
-        return OrderResponse.from(order);
+        return OrderResponseDto.from(order);
     }
 
     /** 로그인한 사용자의 모든 주문 조회 **/
     @Transactional
-    public List<OrderResponse> getAllOrders(CustomUserDetails customUserDetails) {
+    public List<OrderResponseDto> getAllOrders(CustomUserDetails customUserDetails) {
         User user = userService.getAuthenticatedUser(customUserDetails.getProviderId());
         //프록시 객체 -> DTO로 변환 후 반환
         return user.getOrders().stream()
-                .map(OrderResponse::from)
+                .map(OrderResponseDto::from)
                 .collect(Collectors.toList());
     }
 
@@ -93,7 +93,7 @@ public class OrderService {
         User user = order.getUser();
         // 회수해야할 마일리지보다 가지고 있는 마일리지가 적을 경우
         if (user.getMaxMileage() < (int) (order.getFinalPrice() * 0.1)) {
-            throw new GeneralException(ErrorCode.INVALID_MILEAGE);
+            throw new GeneralException(ErrorCode.TOKEN_INVALID);
         }
 
         //주문 상태 변경

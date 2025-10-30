@@ -1,6 +1,7 @@
 package likelion13th.shop.DTO.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import likelion13th.shop.domain.Item;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,7 +27,7 @@ public class ItemResponse {
     public static ItemResponse from(Item item) {
         return new ItemResponse(
                 item.getId(),
-                item.getItemName(),
+                item.getItem_name(),
                 item.getPrice(),
                 item.getBrand(),
                 item.getImagePath(),

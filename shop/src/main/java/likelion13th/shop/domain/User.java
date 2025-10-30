@@ -57,11 +57,6 @@ public class User extends BaseEntity {
     @Embedded
     private Address address;
 
-    // 주문 추가 메서드
-    public void addOrder(Order order) {
-        orders.add(order);
-        order.setUser(this);
-    }
 
     // 주문 정보 (1:N 관계)
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)

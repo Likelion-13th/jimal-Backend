@@ -19,11 +19,11 @@ public class ApiResponse<T> { // API 응답
 
     //성공
     public static <T> ApiResponse<T> onSuccess(BaseCode code, T result) {
-        return new ApiResponse<>(true, code.getCode(), code.getMessage(), result);
+        return new ApiResponse<>(true, code.getReason().getCode(), code.getReason().getMessage(), result);
     }
 
     //실패
     public static <T> ApiResponse<T> onFailure(BaseCode code, T data) {
-        return new ApiResponse<>(false, code.getCode(), code.getMessage(), data);
+        return new ApiResponse<>(false, code.getReason().getCode(), code.getReason().getMessage(), data);
     }
 }
