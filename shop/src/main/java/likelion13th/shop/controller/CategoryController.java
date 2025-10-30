@@ -25,7 +25,7 @@ import java.util.Collections;
 public class CategoryController {
     private final CategoryService categoryService;
 
-    //카테코리 별 상품 조회
+    //카테코리 별 상품 조회   하이용
     @GetMapping("/{categoryId}/items")
     @Operation(summary = "카테고리 별 상품 조회", description = "카테고리 별 상품을 조회합니다.")
     public ApiResponse<?> getItemsByCategory(@PathVariable Long categoryId) {
