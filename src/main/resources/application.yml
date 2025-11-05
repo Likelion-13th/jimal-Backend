@@ -44,6 +44,7 @@ cloud:
     bucket: ${AWS_BUCKET:default-bucket}
 
 server:
+  port: 8080
   tomcat:
     max-swallow-size: -1
     max-http-form-post-size: -1
