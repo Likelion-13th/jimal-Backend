@@ -78,10 +78,12 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQLDialect
     properties:
-      hibernate.dialect: org.hibernate.dialect.MySQLDialect
-      hibernate.use_sql_comments: true
-      hibernate.default_batch_fetch_size: 1000
+        hibernate:
+          dialect: org.hibernate.dialect.MySQLDialect
+          use_sql_comments: true
+          default_batch_fetch_size: 1000
 
 ---
 spring:
