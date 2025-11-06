@@ -55,7 +55,7 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
                         .deletable(true)
                         .build();
 
-                // 예시 주소 설정 (테스트용)
+
                 newUser.setAddress(new Address("10540", "경기도 고양시 덕양구 항공대학로 76", "한국항공대학교"));
                 log.info("// 신규 회원 address 확인: {}", newUser.getAddress().getAddress());
 
