@@ -81,7 +81,7 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList(
                 "http://localhost:3000",
-                "http://sajang-dev.ap-northeast-2.elasticbeanstalk.com",
+                "http://Sajang-dev-env.eba-4qx9gwxi.ap-northeast-2.elasticbeanstalk.com",
                 "https://jimalshop.netlify.app"
 
         ));
