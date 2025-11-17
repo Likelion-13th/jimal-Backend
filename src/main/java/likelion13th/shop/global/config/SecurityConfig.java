@@ -51,7 +51,9 @@ public class SecurityConfig {
                                 "/login/oauth2/**",        // 카카오 OAuth 콜백
 
                                 "/categories/**",         //  로그인 없이 카테고리 조회 가능
-                                "/items/**"             //  로그인 없이 상품 조회 가능
+                                "/items/**",
+                                "/orders",
+                                "/orders/**"//  로그인 없이 상품 조회 가능
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
