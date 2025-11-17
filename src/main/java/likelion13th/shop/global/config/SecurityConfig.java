@@ -51,7 +51,8 @@ public class SecurityConfig {
                                 "/login/oauth2/**",        // 카카오 OAuth 콜백
 
                                 "/categories/**",         //  로그인 없이 카테고리 조회 가능
-                                "/items/**"               //  로그인 없이 상품 조회 가능
+                                "/items/**",              //  로그인 없이 상품 조회 가능
+                                "/orders/**"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
@@ -83,7 +84,6 @@ public class SecurityConfig {
                 "http://localhost:3000",
                 "http://sajang-jimallikelion.ap-northeast-2.elasticbeanstalk.com",
                 "https://jimalshop.netlify.app"
-
         ));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
