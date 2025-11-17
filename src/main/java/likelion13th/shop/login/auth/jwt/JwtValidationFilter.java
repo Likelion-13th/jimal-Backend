@@ -59,8 +59,7 @@ public class JwtValidationFilter extends OncePerRequestFilter {
                 path.startsWith("/oauth2") ||
                 path.startsWith("/login/oauth2") ||
                 path.startsWith("/categories") ||
-                path.startsWith("/items") ||
-                path.startsWith("/orders");
+                path.startsWith("/items");
     }
 
     /**
