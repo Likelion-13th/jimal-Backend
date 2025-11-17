@@ -42,11 +42,25 @@ public class JwtValidationFilter extends OncePerRequestFilter {
     /**
      * 특정 URL은 본 필터를 건너뛴다.
      * - /users/reissue : Refresh 토큰 재발급 엔드포인트
-     *   (설계상 AuthCreationFilter에서 ROLE_ANONYMOUS를 주입해 처리)
+     * - /orders/** : 주문 관련 API (인증 불필요)
+     * - /categories/**, /items/** : 카테고리, 상품 조회 (인증 불필요)
+     * - Swagger, OAuth2, health check 등
      */
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
-        return "/users/reissue".equals(request.getServletPath());
+        String path = request.getServletPath();
+
+        return path.equals("/users/reissue") ||
+                path.startsWith("/health") ||
+                path.startsWith("/swagger-ui") ||
+                path.startsWith("/v3/api-docs") ||
+                path.startsWith("/users/logout") ||
+                path.startsWith("/token") ||
+                path.startsWith("/oauth2") ||
+                path.startsWith("/login/oauth2") ||
+                path.startsWith("/categories") ||
+                path.startsWith("/items") ||
+                path.startsWith("/orders");
     }
 
     /**
